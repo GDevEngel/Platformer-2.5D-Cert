@@ -11,13 +11,13 @@ public class Player : MonoBehaviour
     //config
     private float _speed = 12f;
     private float _gravity = 0.4f;
-    private float _jumpHeight = 30f;
+    private float _jumpHeight = 21f;
 
     //global var
     private float _hDirection;
     private Vector3 _velocity;
     private bool _facingBack = false;
-    //private bool _canDoubleJump;
+    private Transform _standPos;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +32,21 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (_animator.GetBool("Ledge") != true)
+        {
+            CalculateMovement();
+        }
+        else
+        {   // if animator ledge bool is not true then...
+            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                _animator.SetTrigger("ClimbUp");
+            }
+        }
+    }
+
+    private void CalculateMovement()
+    {
         if (_controller.isGrounded)
         {
             _velocity.y = 0;
@@ -42,7 +57,7 @@ public class Player : MonoBehaviour
 
             _animator.SetFloat("Speed", Mathf.Abs(Input.GetAxisRaw("Horizontal")));
 
-            Debug.Log(_hDirection);
+            //Debug.Log(_hDirection);
 
             if (_hDirection >= 0.5f && _facingBack == true)
             {
@@ -67,9 +82,26 @@ public class Player : MonoBehaviour
         // not grounded
         else
         {
-            _velocity.y -= _gravity;            
+            _velocity.y -= _gravity;
         }
         //_velocity.y = _yVelocity;
         _controller.Move(_velocity * Time.deltaTime);
+    }
+
+    public void LedgeGrab(Transform snapPos, Transform standPos)
+    {
+        _animator.SetBool("Ledge", true);
+        _animator.SetBool("Jump", false);
+        _animator.SetFloat("Speed", 0f);
+        _controller.enabled = false;
+        transform.position = snapPos.position;
+        _standPos = standPos;
+    }
+
+    public void StandUp()
+    {
+        transform.position = _standPos.position;
+        _animator.SetBool("Ledge", false);        
+        _controller.enabled = true;
     }
 }
