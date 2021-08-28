@@ -19,10 +19,18 @@ public class ClimbUp : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // communicate with player
+        // communicate with player script
         Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        Debug.Log("find game object with tag" + GameObject.FindGameObjectWithTag("Player").name);
         // teleport player to new position
-        player.StandUp();
+        if (player != null)
+        {
+            player.StandUp();
+        }
+        else
+        {
+            Debug.LogError("ClimbUp.player is null");
+        }
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

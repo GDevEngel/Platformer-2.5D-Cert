@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1087632120480355983}
   - component: {fileID: 1087632120480355982}
   - component: {fileID: 1087632120480355970}
-  - component: {fileID: 1087632120480355971}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -112,18 +111,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a731da8ad4d4ab438d9ac8db0934079, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1087632120480355971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1087632120480355981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edfd15ca83e0ccd458b1fe71ba1f0f1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1087632121303745152
@@ -2842,11 +2829,11 @@ GameObject:
   - component: {fileID: 5171191381658337552}
   m_Layer: 0
   m_Name: Ledge_Grab_Checker
-  m_TagString: Untagged
+  m_TagString: EditorOnly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8407058651999323488
 Transform:
   m_ObjectHideFlags: 0
@@ -2876,7 +2863,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8890631097452211081}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2917,7 +2904,7 @@ BoxCollider:
   m_GameObject: {fileID: 8890631097452211081}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}

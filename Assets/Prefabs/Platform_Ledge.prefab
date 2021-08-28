@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 364848211}
   m_Layer: 0
-  m_Name: Snap Pos (1)
+  m_Name: 'Snap Pos '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,8 +40,8 @@ GameObject:
   m_Component:
   - component: {fileID: 620369730}
   m_Layer: 0
-  m_Name: Stand Up Pos (1)
-  m_TagString: Player
+  m_Name: Stand Up Pos
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7226,8 +7226,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5026765387609106293}
   m_Layer: 0
-  m_Name: Stand Up Pos (1)
-  m_TagString: Player
+  m_Name: Stand Up Pos
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9893,7 +9893,7 @@ GameObject:
   - component: {fileID: 3461602597776650129}
   m_Layer: 0
   m_Name: Stand Up Pos
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15816,7 +15816,7 @@ GameObject:
   m_Component:
   - component: {fileID: 630618215513199227}
   m_Layer: 0
-  m_Name: Snap Pos (1)
+  m_Name: Snap Pos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
