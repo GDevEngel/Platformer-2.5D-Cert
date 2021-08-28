@@ -4822,10 +4822,20 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
+    - target: {fileID: 386795171524305242, guid: 91d8f657f0b3a3e42827f6dd497c2e55,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5000053927241910959, guid: 91d8f657f0b3a3e42827f6dd497c2e55,
         type: 3}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 6210964827592500111, guid: 91d8f657f0b3a3e42827f6dd497c2e55,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6210964829494096820, guid: 91d8f657f0b3a3e42827f6dd497c2e55,
         type: 3}
