@@ -12,6 +12,11 @@ public class Ledge : MonoBehaviour
         {
             Player player = other.GetComponent<Player>();
             player.LedgeGrab(_snapPos, _standPos);
+            if (this.transform.parent.parent.parent.tag == "MovingPlatform")
+            {
+                other.transform.SetParent(this.transform.parent);
+            }
         }
+
     }
 }

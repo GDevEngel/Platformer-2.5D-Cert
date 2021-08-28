@@ -21,7 +21,7 @@ public class ClimbUp : StateMachineBehaviour
     {
         // communicate with player script
         Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        Debug.Log("find game object with tag" + GameObject.FindGameObjectWithTag("Player").name);
+        //Debug.Log("find game object with tag" + GameObject.FindGameObjectWithTag("Player").name);
         // teleport player to new position
         if (player != null)
         {
