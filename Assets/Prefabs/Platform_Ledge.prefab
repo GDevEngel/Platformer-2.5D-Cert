@@ -1,5 +1,65 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &364848210
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 364848211}
+  m_Layer: 0
+  m_Name: Snap Pos (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &364848211
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364848210}
+  m_LocalRotation: {x: -0.707094, y: -0, z: -0, w: 0.7071196}
+  m_LocalPosition: {x: 0.4696632, y: -0.3044029, z: 1.6921788}
+  m_LocalScale: {x: 0.06288809, y: 0.33917394, z: 0.7756177}
+  m_Children: []
+  m_Father: {fileID: 543002952140311432}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &620369729
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 620369730}
+  m_Layer: 0
+  m_Name: Stand Up Pos (1)
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &620369730
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620369729}
+  m_LocalRotation: {x: -0.707094, y: -0, z: -0, w: 0.7071196}
+  m_LocalPosition: {x: 0.4696632, y: 1.4055035, z: -0.64136297}
+  m_LocalScale: {x: 0.23583034, y: 1.0175219, z: 3.4902797}
+  m_Children: []
+  m_Father: {fileID: 543002952140311432}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2354877570271981
 GameObject:
   m_ObjectHideFlags: 0
@@ -1916,7 +1976,7 @@ GameObject:
   - component: {fileID: 543002950970309591}
   - component: {fileID: 543002950970309590}
   m_Layer: 0
-  m_Name: Scifi_Floors_Edge (4)
+  m_Name: Scifi_Floors_Edge (4) Ledge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3126,9 +3186,10 @@ GameObject:
   - component: {fileID: 543002951919102104}
   - component: {fileID: 543002951919102183}
   - component: {fileID: 543002951919102182}
+  - component: {fileID: 1134579858378585784}
   m_Layer: 0
-  m_Name: Cube (1)
-  m_TagString: Untagged
+  m_Name: Cube (1) - Ledge Grab Trigger
+  m_TagString: Ledge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3143,7 +3204,9 @@ Transform:
   m_LocalRotation: {x: 0.707094, y: -0, z: -0, w: 0.7071196}
   m_LocalPosition: {x: -5.55059, y: -1.64, z: -1.91}
   m_LocalScale: {x: 12.721009, y: 0.85953, z: 2.9483397}
-  m_Children: []
+  m_Children:
+  - {fileID: 630618215513199227}
+  - {fileID: 5026765387609106293}
   m_Father: {fileID: 543002952765032088}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 90.00001, y: 0, z: 0}
@@ -3207,6 +3270,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1134579858378585784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 543002951919102180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c38ab0a124628f54394f69b84d6dd3bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _snapPos: {fileID: 630618215513199227}
+  _standPos: {fileID: 5026765387609106293}
 --- !u!1 &543002951951583280
 GameObject:
   m_ObjectHideFlags: 0
@@ -3535,9 +3612,10 @@ GameObject:
   - component: {fileID: 543002952140311435}
   - component: {fileID: 543002952140311434}
   - component: {fileID: 543002952140311433}
+  - component: {fileID: 131679087}
   m_Layer: 0
-  m_Name: Cube (1)
-  m_TagString: Untagged
+  m_Name: Cube (1) - Ledge Grab Trigger
+  m_TagString: Ledge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3552,7 +3630,9 @@ Transform:
   m_LocalRotation: {x: 0.707094, y: -0, z: -0, w: 0.7071196}
   m_LocalPosition: {x: -5.55059, y: -1.64, z: -1.91}
   m_LocalScale: {x: 12.721009, y: 0.85953, z: 2.9483397}
-  m_Children: []
+  m_Children:
+  - {fileID: 364848211}
+  - {fileID: 620369730}
   m_Father: {fileID: 543002950970309589}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 90.00001, y: 0, z: 0}
@@ -3616,6 +3696,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &131679087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 543002952140311447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c38ab0a124628f54394f69b84d6dd3bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _snapPos: {fileID: 364848211}
+  _standPos: {fileID: 620369730}
 --- !u!1 &543002952149742090
 GameObject:
   m_ObjectHideFlags: 0
@@ -5065,7 +5159,7 @@ GameObject:
   - component: {fileID: 543002952765032090}
   - component: {fileID: 543002952765032089}
   m_Layer: 0
-  m_Name: Scifi_Floors_Edge (5)
+  m_Name: Scifi_Floors_Edge (5) Ledge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6426,7 +6520,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1353223066504191460}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 65.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -7122,6 +7216,36 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &1568713478061310296
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5026765387609106293}
+  m_Layer: 0
+  m_Name: Stand Up Pos (1)
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5026765387609106293
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568713478061310296}
+  m_LocalRotation: {x: -0.707094, y: -0, z: -0, w: 0.7071196}
+  m_LocalPosition: {x: 0.4696632, y: 1.4055035, z: -0.641363}
+  m_LocalScale: {x: 0.23583034, y: 1.0175219, z: 3.4902797}
+  m_Children: []
+  m_Father: {fileID: 543002951919102181}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1594460105769481233
 GameObject:
   m_ObjectHideFlags: 0
@@ -9637,7 +9761,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3461602596756121759
 Transform:
   m_ObjectHideFlags: 0
@@ -15682,6 +15806,36 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &7250417764818834355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 630618215513199227}
+  m_Layer: 0
+  m_Name: Snap Pos (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &630618215513199227
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7250417764818834355}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0.4696632, y: -0.3044029, z: 1.69}
+  m_LocalScale: {x: 0.06288809, y: 0.33917394, z: -0.7756177}
+  m_Children: []
+  m_Father: {fileID: 543002951919102181}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &7423608230310162956
 GameObject:
   m_ObjectHideFlags: 0
