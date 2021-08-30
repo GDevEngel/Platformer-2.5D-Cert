@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     private Vector3 _velocity;
     private bool _facingBack = false;
     private Transform _standPos;
+    private int _collected = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -103,5 +104,11 @@ public class Player : MonoBehaviour
         transform.position = _standPos.position;
         _animator.SetBool("Ledge", false);        
         _controller.enabled = true;
+    }
+
+    public void Collected()
+    {
+        _collected++;
+        UIManager.Instance.UICollectableTextUpdate(_collected);
     }
 }
