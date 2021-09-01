@@ -23,7 +23,7 @@ public class Elevator : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.position = Vector3.MoveTowards(transform.position, _target.position, _speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, _target.position, _speed * Time.deltaTime);        
     }
 
     private void OnTriggerEnter(Collider other)
