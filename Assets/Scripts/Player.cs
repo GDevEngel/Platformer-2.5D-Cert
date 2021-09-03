@@ -37,9 +37,15 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_animator.GetBool("Ledge") == false && _isRolling == false)
+        if (_animator.GetBool("Ledge") == false && _isRolling == false && _animator.GetBool("Ladder") == false)
         {
             CalculateMovement();
+        }
+        else if (_animator.GetBool("Ladder") == true)
+        {
+            _velocity = new Vector3(0, Input.GetAxisRaw("Vertical") * _climbSpeed, 0);
+            _animator.SetFloat("ClimbDirection", Input.GetAxisRaw("Vertical"));
+            _controller.Move(_velocity * Time.deltaTime);
         }
         else if (_animator.GetBool("Ledge") == true && Input.GetAxisRaw("Vertical") == 1)
         {
@@ -69,13 +75,11 @@ public class Player : MonoBehaviour
 
             if (_hDirection >= 0.5f && _facingBack == true)
             {
-                transform.Rotate(0, 180f, 0);
-                _facingBack = false;
+                FaceDirectionSwitch();
             }
             else if (_hDirection <= -0.5 && _facingBack == false)
             {
-                transform.Rotate(0, 180f, 0);
-                _facingBack = true;
+                FaceDirectionSwitch();
             }
 
             // roll l-shift
@@ -115,6 +119,12 @@ public class Player : MonoBehaviour
         _controller.Move(_velocity * Time.deltaTime);
     }
 
+    private void FaceDirectionSwitch()
+    {
+        transform.Rotate(0, 180f, 0);
+        _facingBack = !_facingBack;
+    }
+
     public void LedgeGrab(Transform snapPos, Transform standPos)
     {
         _animator.SetBool("Ledge", true);
@@ -137,20 +147,55 @@ public class Player : MonoBehaviour
         _collected++;
         UIManager.Instance.UICollectableTextUpdate(_collected);
     }
-
-    public void Ladder(Transform botSnapPos, Transform TopSnapPos)
+    
+    public void Ladder(Transform botSnapPos, Transform topSnapPos, Transform topEndTrigger)
     {
-        StartCoroutine(LadderClimb(botSnapPos, TopSnapPos));
-    }
-
-    IEnumerator LadderClimb(Transform startPos, Transform endPos)
-    {
-        _controller.enabled = false;
-        transform.position = startPos.position;
-        _animator.SetBool("Ladder", true);
-        yield return new WaitForSeconds(3f); //insert distance start n end pos divided by speed?
-        _controller.enabled = true;
-        _animator.SetBool("Ladder", true);
+        // get on ladder
+        if (_animator.GetBool("Ladder") == false)
+        {
+            //check which snap pos is closer then snap to it
+            if (Vector3.Distance(transform.position, botSnapPos.position) < Vector3.Distance(transform.position, topSnapPos.position) 
+                && Input.GetAxisRaw("Vertical") == 1)
+            {
+                //disable controller to be able to snap to a position
+                _controller.enabled = false;
+                transform.position = botSnapPos.position;
+                _animator.SetBool("Ladder", true);
+                _controller.enabled = true;
+            }
+            else if (Vector3.Distance(transform.position, botSnapPos.position) > Vector3.Distance(transform.position, topSnapPos.position)
+                && Input.GetAxisRaw("Vertical") == -1)
+            {
+                //disable controller to be able to snap to a position
+                _controller.enabled = false;
+                transform.position = topEndTrigger.position;
+                FaceDirectionSwitch();
+                _animator.SetBool("Ladder", true);
+                _controller.enabled = true;
+            }
+        }
+        // get off ladder
+        if (_animator.GetBool("Ladder") == true)
+        {
+            if (Vector3.Distance(transform.position, botSnapPos.position) < 1f
+                && Input.GetAxisRaw("Vertical") == -1)
+            {
+                //disable controller to be able to snap to a position
+                _controller.enabled = false;
+                transform.position = botSnapPos.position;
+                _animator.SetBool("Ladder", false);
+                _controller.enabled = true;
+            }
+            else if (Vector3.Distance(transform.position, topEndTrigger.position) < 1f
+                && Input.GetAxisRaw("Vertical") == 1)
+            {
+                //disable controller to be able to snap to a position
+                _controller.enabled = false;
+                transform.position = topSnapPos.position;
+                _animator.SetBool("Ladder", false);
+                _controller.enabled = true;
+            }
+        }
     }
 
     public void EndRoll() //used by animation state script "Roll.cs"
