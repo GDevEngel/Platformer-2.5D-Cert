@@ -9,9 +9,9 @@ public class Player : MonoBehaviour
     private Animator _animator;
 
     //config
-    private float _speed = 12f;
-    private float _gravity = 0.4f;
-    private float _jumpHeight = 21f;
+    [SerializeField] private float _speed = 12f;
+    [SerializeField] private float _gravity = 0.3f;
+    [SerializeField] private float _jumpHeight = 21f;
     private float _climbSpeed = 3f;
     private float _rollSpeed = 12f;
 
@@ -27,6 +27,8 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Application.targetFrameRate = 60;
+
         _controller = GetComponent<CharacterController>();
         if (_controller == null) { Debug.LogError("Player. char controller is null"); }
 
@@ -57,19 +59,22 @@ public class Player : MonoBehaviour
             Vector3 rollVelocity = new Vector3(0, 0, _rollDirection * _rollSpeed);
             _controller.Move(rollVelocity * Time.deltaTime);
         }
+
+        //Debug.Log("velocity.y "+_velocity.y);
     }
 
     private void CalculateMovement()
     {
+        Debug.Log(_controller.isGrounded);
         if (_controller.isGrounded)
         {
             _velocity.y = 0;
             _animator.SetBool("Jump", false);
 
             _hDirection = Input.GetAxisRaw("Horizontal");
-            _velocity = new Vector3(0, 0, _hDirection) * _speed;
+            _velocity = new Vector3(0, 0, _hDirection) * _speed * Time.deltaTime;
 
-            _animator.SetFloat("Speed", Mathf.Abs(Input.GetAxisRaw("Horizontal")));
+            _animator.SetFloat("Speed", Mathf.Abs(_hDirection));
 
             //Debug.Log(_hDirection);
 
@@ -104,19 +109,19 @@ public class Player : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.Space))
             {
                 Debug.Log("jump");
-                _velocity.y += _jumpHeight;
+                _velocity.y += _jumpHeight * Time.deltaTime;
                 //
                 _animator.SetBool("Jump", true);
             }
 
         }
         // not grounded
-        else
+        else //if (_velocity.y != 0)
         {
-            _velocity.y -= _gravity;
+            _velocity.y -= _gravity * Time.deltaTime;
         }
-        //_velocity.y = _yVelocity;
-        _controller.Move(_velocity * Time.deltaTime);
+        _velocity.y -= _gravity * Time.deltaTime;
+        _controller.Move(_velocity);
     }
 
     private void FaceDirectionSwitch()
@@ -190,6 +195,7 @@ public class Player : MonoBehaviour
                 && Input.GetAxisRaw("Vertical") == 1)
             {
                 //disable controller to be able to snap to a position
+                _velocity.y = 0; //otherwise player keeps velocity from climbing up ladder and flies sky high
                 _controller.enabled = false;
                 transform.position = topSnapPos.position;
                 _animator.SetBool("Ladder", false);
