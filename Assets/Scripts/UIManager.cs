@@ -25,10 +25,19 @@ public class UIManager : MonoBehaviour
     // handle
     [SerializeField] private Text _collectableText;
 
+    // global var
+    private int _totalCollectables;
+
+    private void Start()
+    {
+        _totalCollectables = GameObject.FindGameObjectsWithTag("Collectable").Length;
+        _collectableText.text = "Collect Boxes: " + _totalCollectables;
+    }
+
 
     public void UICollectableTextUpdate(int collectableCount)
     {
-        _collectableText.text = "Collected: " + collectableCount;
+        _collectableText.text = "Collect Boxes: " + (_totalCollectables - collectableCount);
     }
 
 }

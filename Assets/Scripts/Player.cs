@@ -7,6 +7,12 @@ public class Player : MonoBehaviour
     //handle
     private CharacterController _controller;
     private Animator _animator;
+    private AudioSource _audioSource;
+
+    //sfx
+    [SerializeField] AudioClip _jumpSFX;
+    [SerializeField] AudioClip _ledgeSFX;
+    [SerializeField] AudioClip _collectableSFX;
 
     //config
     [SerializeField] private float _speed = 12f;
@@ -33,7 +39,10 @@ public class Player : MonoBehaviour
         if (_controller == null) { Debug.LogError("Player. char controller is null"); }
 
         _animator = GetComponentInChildren<Animator>();
-        if (_controller == null) { Debug.LogError("Player child animator is null"); }
+        if (_animator == null) { Debug.LogError("Player child animator is null"); }
+
+        _audioSource = GetComponent<AudioSource>();
+        if (_audioSource == null) { Debug.LogError(this.gameObject.name +" audiosource is null"); }
     }
 
     // Update is called once per frame
@@ -52,6 +61,8 @@ public class Player : MonoBehaviour
         else if (_animator.GetBool("Ledge") == true && Input.GetAxisRaw("Vertical") == 1)
         {
             _animator.SetTrigger("ClimbUp");
+            _audioSource.clip = _ledgeSFX;
+            _audioSource.Play();
         }
         else if (_isRolling == true)
         {
@@ -110,7 +121,8 @@ public class Player : MonoBehaviour
             {
                 Debug.Log("jump");
                 _velocity.y += _jumpHeight * Time.deltaTime;
-                //
+                _audioSource.clip = _jumpSFX;
+                _audioSource.Play();
                 _animator.SetBool("Jump", true);
             }
 
@@ -136,12 +148,13 @@ public class Player : MonoBehaviour
         _animator.SetBool("Jump", false);
         _animator.SetFloat("Speed", 0f);
         _controller.enabled = false;
+        _velocity = new Vector3(0,0,0);
         transform.position = snapPos.position;
         _standPos = standPos;
     }
 
     public void StandUp()
-    {
+    {        
         transform.position = _standPos.position;
         _animator.SetBool("Ledge", false);        
         _controller.enabled = true;
@@ -150,6 +163,7 @@ public class Player : MonoBehaviour
     public void Collected()
     {
         _collected++;
+        AudioSource.PlayClipAtPoint(_collectableSFX, Camera.main.transform.position);
         UIManager.Instance.UICollectableTextUpdate(_collected);
     }
     
@@ -187,6 +201,7 @@ public class Player : MonoBehaviour
             {
                 //disable controller to be able to snap to a position
                 _controller.enabled = false;
+                _velocity = new Vector3(0, 0, 0);
                 transform.position = botSnapPos.position;
                 _animator.SetBool("Ladder", false);
                 _controller.enabled = true;
@@ -195,7 +210,7 @@ public class Player : MonoBehaviour
                 && Input.GetAxisRaw("Vertical") == 1)
             {
                 //disable controller to be able to snap to a position
-                _velocity.y = 0; //otherwise player keeps velocity from climbing up ladder and flies sky high
+                _velocity = new Vector3(0, 0, 0); //otherwise player keeps velocity from climbing up ladder and flies sky high
                 _controller.enabled = false;
                 transform.position = topSnapPos.position;
                 _animator.SetBool("Ladder", false);
@@ -207,5 +222,12 @@ public class Player : MonoBehaviour
     public void EndRoll() //used by animation state script "Roll.cs"
     {
         _isRolling = false;
+    }
+
+    public void Finish()
+    {
+        _controller.enabled = false;
+        transform.Rotate(0, 90f, 0);
+        _animator.SetTrigger("Finish");
     }
 }
