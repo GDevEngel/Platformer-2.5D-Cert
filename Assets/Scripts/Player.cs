@@ -163,7 +163,9 @@ public class Player : MonoBehaviour
     public void Collected()
     {
         _collected++;
-        AudioSource.PlayClipAtPoint(_collectableSFX, Camera.main.transform.position);
+        _audioSource.clip = _collectableSFX;
+        _audioSource.Play();
+        //AudioSource.PlayClipAtPoint(_collectableSFX, Camera.main.transform.position);
         UIManager.Instance.UICollectableTextUpdate(_collected);
     }
     
